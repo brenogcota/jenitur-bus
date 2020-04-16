@@ -1,24 +1,34 @@
 <?php
 
-Route::get('viagens', 'TripController@index');
-Route::get('viagem/cadastrar', 'TripController@create')->name('viagem.create');
-Route::post('viagem/cadastrar', 'TripController@store')->name('viagem.store');
-Route::get('viagem/{id}', 'TripController@show');
-Route::get('viagem/deletar/{id}', 'TripController@destroy');
 
-Route::get('passageiros', 'PassengerController@index');
-Route::get('passageiro/cadastrar/{id}', 'PassengerController@create')->name('passageiro.create');
-Route::post('passageiro/cadastrar/{id}', 'PassengerController@store')->name('passageiro.store');
-Route::get('passageiro/{id}', 'PassengerController@show');
-Route::get('passageiro/deletar/{id}', 'PassengerController@destroy');
+Route::group(['middleware' => ['auth']], function () {
 
-Route::get('relatorio/{id}', 'RecordController@show')->name('relatorio.show');
+    Route::get('viagens', 'TripController@index')->name('viagem.index');
+    Route::get('viagem/cadastrar', 'TripController@create')->name('viagem.create');
+    Route::post('viagem/cadastrar', 'TripController@store')->name('viagem.store');
+    Route::get('viagem/{id}', 'TripController@show');
+    Route::get('viagem/deletar/{id}', 'TripController@destroy')->name('viagem.delete');
+    Route::get('viagem/editar/{id}', 'TripController@edit')->name('viagem.edit');
+    Route::post('viagem/editar/{id}', 'TripController@update')->name('viagem.update');
+    
+    Route::get('passageiros', 'PassengerController@index');
+    Route::get('passageiro/cadastrar/{id}', 'PassengerController@create')->name('passageiro.create');
+    Route::post('passageiro/cadastrar/{id}', 'PassengerController@store')->name('passageiro.store');
+    Route::get('passageiros/{id}', 'PassengerController@show')->name('passageiro.show');
+    Route::get('passageiro/deletar/{id}', 'PassengerController@destroy')->name('passageiro.delete');
+    Route::get('passageiro/editar/{id}', 'PassengerController@edit')->name('passageiro.edit');
+    Route::post('passageiro/editar/{id}', 'PassengerController@update')->name('passageiro.update');
+    
+    Route::get('relatorio', 'RecordController@index')->name('relatorio.index');
+    Route::get('relatorio-viagem/pdf', 'RecordController@generatePDF')->name('relatorio-viagem.pdf');
+    Route::get('relatorio-passageiro/pdf', 'RecordController@generatePassengersPDF')->name('relatorio-passageiros.pdf');
 
-
-Route::get('/login', function () {
-    return view('pages.login');
+    
 });
 
-Route::get('/', function () {
-    return view('pages.login');
-});
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', 'HomeController@index')->name('home');
+Route::get('/register', 'HomeController@register')->name('register');

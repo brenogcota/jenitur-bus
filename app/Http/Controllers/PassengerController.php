@@ -8,6 +8,8 @@ use App\Models\Trip;
 use App\Format;
 use App\Validate;
 use App\Utils;
+use DB;
+use Auth;
 
 class PassengerController extends Controller
 {
@@ -20,7 +22,6 @@ class PassengerController extends Controller
 
 
     public function __construct(Passenger $passenger, Trip $trip, Format $format, Validate $validate, Utils $util){
-
         $this->PassengerModel = $passenger;
         $this->Trip = $trip;
         $this->format = $format;
@@ -39,7 +40,7 @@ class PassengerController extends Controller
         }
         
 
-        return view('show')->with(compact('passenger'));
+        return view('pages.passageiros')->with(compact('passenger'));
     }
 
     public function create()
@@ -52,6 +53,7 @@ class PassengerController extends Controller
     {   
        
             $passenger = $this->PassengerModel;
+            
 
             $passenger->NOME = $request->nome;
             $passenger->RG = $request->rg;
@@ -60,49 +62,58 @@ class PassengerController extends Controller
             $passenger->TELEFONE1 = $request->telefone1;
             $passenger->TELEFONE2 = $request->telefone2;
 
+            $passenger->POLTRONA = $request->poltrona;
+
             $passenger->CODVIAGEM = $id;
+
+            $user = Auth::user()->name;
+
+            $passenger->USUARIO = $user;
+
 
             $valCPF =  $this->validate;
             $valCPF->validateCPF($request->cpf);
             if($valCPF == true)
                 $passenger->CPF = $request->cpf;
             else
-                return 'CPF inválido.';
+                return '<script> alert("CPF Inválido!") </script>';
 
-            if($request->cpfcrianca != null)
-            {
-                $valCPF->validateCPF($request->cpfcrianca);
-                if($valCPF == true)
-                    $passenger->CPFCRIANCA = $request->cpfcrianca;
-                else
-                    return 'CPF inválido.';
+            if($request->documento_crianca) {
+                $passenger->POSSCRIANCA = 'SIM';
+                $passenger->NOMECRIANCA = $request->nome_crianca;
+                $passenger->DOCCRIANCA = $request->documento_crianca;
+            
             }
 
 
             $res = $this->Utils->updateVacancie($id);
             if ($res == 'ok'){
                 $passenger->save();
-                return '<script> alert("Passageiro cadastrado!") </script>';
+                echo '<script> alert("Passageiro cadastrado!") </script>';
+                return view('pages.cadastrar_passageiro');
+
             }
-            else 
-                return '<script> alert("Erro ao cadastrar!") </script>';
+            else {
+                echo  '<script> alert("Erro ao cadastrar!") </script>';
+                return view('pages.cadastrar_passageiro');
+            }
         
     }
 
     public function show($id)
     {
-         $passenger = $this->PassengerModel->find($id);
-         $format = $this->format;
 
-         $date = $format->formatDate($passenger->DATANASC);
-         $passenger->DATANASC = $date;
-
-        return view('show')->with(compact('passenger'));
+        
+        $passenger = $this->PassengerModel->where('CODVIAGEM', $id)->get();
+        
+        return view('pages.passageiros')->with(compact('passenger'));
     }
 
     public function edit($id)
     {
         //
+
+        return view('pages.edit-passageiro')->with(compact('id'));
     }
 
   
@@ -110,19 +121,48 @@ class PassengerController extends Controller
     {
         $passenger = $this->PassengerModel->find($id);
         
-        if($passenger){
-            $passenger->DDD1 = $request->ddd1;
-            $passenger->TELEFONE1 = $request->telefone1;
-            $passenger->DDD2 = $request->ddd2;
-            $passenger->TELEFONE2 = $request->telefone2;
+
+        
+        if(is_null($request->poltrona))
+        {
+            $vacancie = $this->Utils->returnVacancies($id);
+            $passenger->POLTRONA = $vacancie;
+        } else {
+            $passenger->POLTRONA = $request->poltrona;
+        }
+
+        if($request->documento_crianca) {
+            $update = $passenger->update([
+                'POSSCRIANCA' => 'SIM',
+                'NOMECRIANCA'  => $request->nome_crianca, 
+                'DOCCRIANCA'  => $request->documento_crianca
+
+            ]);
+        
+        }
+
+        if($passenger)
+        {
+            $update = $passenger->update([
+                'NOME' => $request->nome, 
+                'RG'   => $request->rg, 
+                'DATANASC'  => $request->datanasc, 
+                'TELEFONE1'  => $request->telefone1, 
+                'TELEFONE2'  => $request->telefone2,
+                'CPF'  => $request->cpf, 
+            ]);
+
+
+            
 
             $passenger->save();
-            return 'Passageiro alterado com sucesso!';
-        }
-
-        else{
-            return 'Mensagem de erro.';
-        }
+            echo '<script> alert("Passageiro atualizado!") </script>';
+            return view('home');
+          }
+          else {
+              echo '<script> alert("Tente novamente mais tarde!") </script>';
+              return view('home');
+          }
 
     }
 
@@ -130,13 +170,18 @@ class PassengerController extends Controller
     public function destroy($id)
     {
         $passenger = $this->PassengerModel->find($id);
+        $id_viagem = $passenger->CODVIAGEM;
+        $util = $this->Utils;
+
+        $util->removeVacancie($id_viagem);
 
         if($passenger){
             $delete = $passenger->delete();
-            return 'Passageiro deletada com sucesso!';
+            return $this->index();
         }
         else{
-            return 'Passageiro não encontrado.';
+            echo '<script> alert("Erro ao excluir!") </script>';
+            return $this->index();
         }
     }
 

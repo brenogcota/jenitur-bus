@@ -15,6 +15,7 @@ class TripController extends Controller
 
     public function __construct(Trip $trip, Format $format, Validate $validate)
     {
+        
         $this->tripModel = $trip;
         $this->format = $format;
         $this->validate = $validate;
@@ -25,7 +26,7 @@ class TripController extends Controller
     
     public function index()
     {
-        $trip = $this->tripModel->orderBy('DATA', 'DESC')->get();
+        $trip = $this->tripModel->orderBy('DATA', 'DESC')->limit(10)->get();
         foreach($trip as $t){
             $format = $this->format;
             $date = $format->formatDate($t->DATA);
@@ -41,7 +42,7 @@ class TripController extends Controller
     
     public function create()
     {
-        return view('form');
+        return view('pages.cadastrar_viagem');
     }
 
     
@@ -52,19 +53,22 @@ class TripController extends Controller
        $trip->ORIGEM = $request->origem;
        $trip->DESTINO = $request->destino;
        $trip->DATA = $request->data;
-       $trip->HORARIO = $request->horario;
+       $trip->HORARIO = $request->horario.':00';
 
        $valBoard = $this->validate->validateBoard($request->placa);
+
 
        if ($valBoard == 'ok')
        {
             $trip->PLACAVEICULO = $request->placa;
        }
-       else
-            return 'placa invalida';
+       else {
+            echo '<script> alert("Placa inválida!") </script>';
+            return $this->create();
+       }
        
       $trip->save();
-      return 'viagem criada!';
+      return $this->index();
 
     }
 
@@ -85,7 +89,7 @@ class TripController extends Controller
 
     public function edit($id)
     {
-        //
+        return view('pages.edit')->with(compact('id'));
     }
 
     
@@ -101,14 +105,17 @@ class TripController extends Controller
                 'DESTINO' => $request->destino,
                 'DATA' => $request->data,
                 'HORARIO' => $request->horario,
+                'STATUS' => $request->status
             ]);
            
-            return 'viagem alterada';
-        } 
-        else 
-            return 'erro';    
-
-    }
+            echo '<script> alert("Viagem atualizada!") </script>';
+            return $this->index();
+          }
+          else {
+              echo '<script> alert("Tente novamente mais tarde!") </script>';
+              return $this->index();
+          }
+      }
 
   
     public function destroy($id)
@@ -119,10 +126,12 @@ class TripController extends Controller
         if($trip)
         {
           $delete = $trip->delete();
-          return 'viagem deletada';
+          return $this->index();
         }
-        else 
-            return 'viagem não encontrada';
+        else {
+            echo '<script> alert("Tente novamente mais tarde!") </script>';
+            return $this->index();
+        }
     }
 
     

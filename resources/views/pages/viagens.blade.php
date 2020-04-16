@@ -1,78 +1,73 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale-1">
-		<title>Viagens - Jenitur Turismo</title>
+@extends('adminlte::page')
 
-		<link rel="stylesheet" type="text/css" href="{{ asset('css/estilo.css') }}">
-		<link rel="stylesheet" href="{{ asset('https://use.fontawesome.com/releases/v5.4.2/css/all.css') }}">
-		<link href="{{ asset('https://fonts.googleapis.com/css?family=Noto+Sans+JP:400,900&display=swap') }}" rel="stylesheet">
+@section('title', 'Jenitur')
 
-	</head>
-	<body>
-		<nav class="menu">
-			<div class="logo">
-				<div class="logo1">
-					<h1 align="center">JENITUR</h1>
-				</div>
-				<div class="logo2">
-					<h3 align="center">Turismo</h3>
-				</div>
-			</div>
-			<a class="btn-close"><i class="fa fa-times"></i></a>
-			<ul>
-				<a href="/viagem/cadastrar"><li> Cadastrar Viagem </li></a>
-				<a href="/viagens"><li> Cadastrar Passageiro </li></a>
-				<a href="/relatorio"><li> Relatórios </li></a>
-				<a href="/login"><li style="margin-top: 50%"> Sair </li></a>
-			</ul>
-		</nav>
+@section('content_header')
+    <h1>Viagens</h1>
+@stop
 
-		<button class="btn-menu"><i class="fa fa-bars fa-lg"></i></button>
+<style>
+	#example1 {
+	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+	}
 
-		<!--Secao com todas as viagens cadastradas-->
-		<content class="viagens">
-			<div class="top">
-				<h1>Escolha a Viagem</h1>
-			</div>
-			<!--A estrutura de repeticao deve comecar aqui-->
-			@foreach($trip as $t)
+	#example1 td, #example1 th {
+	border: 1px solid #ddd;
+	padding: 8px;
+	color: #777;
+	}
+
+	#example1 tr:nth-child(even){background-color: #f2f2f2;}
+
+	#example1 tr:hover {background-color: #ddd;}
+
+	#example1 th {
+	padding-top: 12px;
+	padding-bottom: 12px;
+	text-align: left;
+	background-color: #fff;
+	color: #666;
+	}
+</style>
+
+@section('content')
+
+	
 			
-			<a href="{{ route('passageiro.create', [$t->id]) }}">
-				<div class="viagem">
-					<!--Cidade origem     Estado origem-->
-					<p> {{ $t->ORIGEM }} </p>
-					
-					<i class="fas fa-chevron-right"></i>
-					<i class="fas fa-chevron-right"></i>
-					<i class="fas fa-chevron-right"></i>
-					
-					<!--Cidade destino     Estado destino-->
-					<p> {{ $t->DESTINO }} </p><br>
-									     <!--Data da viagem-->
-					<p>Data: &nbsp <span>  {{ $t->DATA }} </span></p>
-									        <!--Veiculo-->
-					<p>Placa: &nbsp <span> {{ $t->PLACAVEICULO }}  </span></p><br>
-										  <!--Horario-->
-					<p>Horário: &nbsp <span> {{ $t->HORARIO }}  </span></p><br>
+			<div class="box-body">
+              <table id="example1" class="table table-bordered">
+                <tr>
+				  <th>#</th>
+                  <th>Origem</th>
+                  <th>Destino</th>
+				  <th>Data</th>
+				  <th>Placa</th>
+				  <th>Horario</th>
+				  <th>Status</th>
+				  <th>Ação</th>
+                </tr>
 
-						<p>Status: &nbsp <span class="status">{{ $t->STATUS }}</span></p>
-				</div>
-			</a>
-			@endforeach
-		</content>
+		@foreach($trip as $t)
+
 		
+			
+					<tr>
+					<td><a href="{{ route('passageiro.create', [$t->id]) }}"><i class="fas fa-plus"></i></a></td>
+					<td>{{ $t->ORIGEM }}</td>
+					<td>{{ $t->DESTINO }}</td>
+					<td>{{ $t->DATA }}</td>
+					<td>{{ $t->PLACAVEICULO }}</td>
+					<td>{{ $t->HORARIO }} </td>
+					<td><span class="label label-success">{{ $t->STATUS }}</span></td>
+					<td>
+						<a href="{{ route('viagem.delete', [$t->id]) }}"><i class="fas fa-trash"></i></a>
+						<a href="{{ route('viagem.edit', [$t->id]) }}"><i class="fas fa-edit"></i></a>
+					</td>
+					
+					</tr>
+					
+		@endforeach
 
-		<!--JQUERY-->
-		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-		<script>
-			$(".btn-menu").click(function(){
-				$(".menu").show();
-			})
-			$(".btn-close").click(function(){
-				$(".menu").hide();
-			})
-		</script>
-	</body>
-</html>
+@stop

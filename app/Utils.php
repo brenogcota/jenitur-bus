@@ -2,24 +2,21 @@
 Namespace App;
 use App\Models\Passenger;
 use App\Models\Trip;
+use DB;
 
 class Utils {
 
 
-    public function returnVacancies()
+    static function returnVacancies($di)
     {
 
-        $passenger = new Passenger();
-
-        $vacancies = $passenger::all();
-        $arr = [];
-        foreach($vacancies as $v){
-              $ar = $v->POLTRONA;
-              array_push($arr, $ar);
-        }
-
+        $board = DB::table('passageiro')->where('id', $di)->select('POLTRONA')->get();
         
-        return $arr;
+        foreach ($board as $b)
+        {
+            return $b->POLTRONA;
+        }
+         
         
     }
 
@@ -39,30 +36,40 @@ class Utils {
             return 'limit';
     }
 
-    public function teste()
+    public function removeVacancie($id)
+    {
+        $Trip = new Trip();
+        $trip = $Trip->find($id);
+        $vagas = $trip->VAGAS;
+
+        $trip->VAGAS = $vagas + 1;
+        $trip->save();
+    }
+
+    static function returnBoards($id)
     {
         
-        $trip = $this->tripModel;
-        $trip->ORIGEM = 'Jenipapo, MG';
-        $trip->DESTINO = 'Belo Horizonte, SP';
-        $trip->DATA = '2020-03-05';
-        $trip->HORARIO = '05:00:00';
-        $trip->PLACAVEICULO = 'PZU-7682';
+        $boards = DB::table('passageiro')->where('CODVIAGEM', $id)->select('POLTRONA')->get();
+        $arrBoard = array();
+        $arr = [1, 2, 3 , 4, 5, 6, 7, 8, 9, 10,
+                11, 12, 13 , 14, 15, 16, 17, 18, 19, 20,
+                21, 22, 23 , 24, 25, 26, 27, 28, 29, 30,
+                31, 32, 33 , 34, 35, 36, 37, 38, 39, 40,
+                41, 42, 43 , 44, 45, 46
+        ];
 
-        $valBoard = $this->validate->validateBoard($trip->PLACAVEICULO);
-        if ($valBoard == 'ok'){
-            $trip->PLACAVEICULO = $trip->PLACAVEICULO;
+        foreach($boards as $board) {
+            array_push($arrBoard, $board->POLTRONA);
         }
-        else
-            return 'placa invalida';
-        
 
-        $trip->save();
+        $result = array_diff($arr, $arrBoard);
+    
+        return $result;
+
+        
+    }
 
     
-
-       return 'viagem criada!';
-    }
 }
 
 ?>
