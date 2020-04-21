@@ -34,19 +34,91 @@
 
 @section('content')
 
+			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+				Adicionar onibus
+			</button>
+
+
+			<!-- The Modal -->
+			<div class="modal" id="myModal">
+			<div class="modal-dialog">
+				<div class="modal-content">
+
+				<!-- Modal Header -->
+				<div class="modal-header">
+					<h4 class="modal-title">Adicionar Onibus</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- Modal body -->
+				<form action="{{ route('onibus.store')}}" method="post">
+					@csrf
+					<div class="modal-body">
+							<div class="box-body">
+								<div class="form-group">
+								
+									<label>Placa</label>
+									<input type="text" class="form-control" name="placa" required>
+
+								</div>
+
+								<div class="form-group">
+								
+									<label>Modelo</label>
+									<input type="text" class="form-control" name="modelo" required>
+
+								</div>
+
+								<div class="form-group">
+								
+									<label>Apolice</label>
+									<input type="text" class="form-control" name="apolice" required>
+
+								</div>
+
+								<div class="form-group">
+								
+									<label>Número</label>
+									<input type="text" class="form-control" name="numero" required>
+
+								</div>
+
+								<div class="form-group">
+								
+									<label>Poltronas</label>
+									<input type="text" class="form-control" name="poltronas" value="46" required>
+
+								</div>
+
+								<div class="form-group">
+								
+									<label>Observação</label>
+									<input type="text" class="form-control" name="observacao">
+
+								</div>
+							</div>
+					</div>
+
+					<!-- Modal footer -->
+					<div class="modal-footer">
+						<button type="submit" class="btn btn-primary">Cadastrar</button>
+					</div>
+				</form>
+
+				</div>
+			</div>
+			</div>
 	
 			
-			<div class="box-body">
+			<div class="box-body" style="overflow: auto;">
               <table id="example1" class="table table-bordered">
                 <tr>
-				  <th>#</th>
                   <th>Placa</th>
                   <th>Modelo</th>
 				  <th>Apolice</th>
-                  <th>Obeservação</th>
                   <th>Número</th>
                   <th>Poltronas</th>
-                  <th>Ação</th>
+                  <th>Obeservação</th>
                 </tr>
 
 		@foreach($bus as $b)
@@ -54,17 +126,12 @@
 		
 			
 					<tr>
-					<td><a href=""><i class="fas fa-plus"></i></a></td>
 					<td>{{ $b->PLACA }}</td>
 					<td>{{ $b->MODELO }}</td>
                     <td>{{ $b->APOLICE }}</td>
-                    <td>{{ $b->OBSERVACAO }}</td>
                     <td>{{ $b->NUMERO }}</td>
                     <td>{{ $b->POLTRONAS }}</td>
-					<td>
-						<a href=""><i class="fas fa-trash"></i></a>
-						<a href=""><i class="fas fa-edit"></i></a>
-					</td>
+                    <td>{{ $b->OBSERVACAO }}</td>
 					
 					</tr>
 					

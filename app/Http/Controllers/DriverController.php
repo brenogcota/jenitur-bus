@@ -44,6 +44,7 @@ class DriverController extends Controller
 
        
       $driver->save();
+      return $this->index();
 
     }
 

@@ -32,7 +32,7 @@ return [
 
     'logo' => '<b>Jenitur</b>Turismo',
 
-    'logo_mini' => '<i class="fas fa-home"></i>',
+    'logo_mini' => 'JT',
 
     /*
     |--------------------------------------------------------------------------

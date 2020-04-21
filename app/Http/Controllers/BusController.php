@@ -45,6 +45,12 @@ class BusController extends Controller
        $bus->MODELO = $request->modelo;
        $bus->APOLICE = $request->apolice;
        $bus->NUMERO = $request->numero;
+       $bus->POLTRONAS = $request->poltronas;
+
+       if($request->observacao)
+       {
+           $bus->OBSERVACAO = $request->observacao;
+       }
 
        $valBoard = $this->validate->validateBoard($request->placa);
 
@@ -59,7 +65,7 @@ class BusController extends Controller
        }
        
       $bus->save();
-
+      return $this->index();
     }
 
     public function show($id)

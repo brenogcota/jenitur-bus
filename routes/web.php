@@ -24,8 +24,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('relatorio-passageiro/pdf/{id}', 'RecordController@generatePassengersPDF')->name('relatorio-passageiros.pdf');
 
     Route::get('onibus', 'BusController@index')->name('onibus.index');
+    Route::post('onibus/cadastrar', 'BusController@store')->name('onibus.store');
 
     Route::get('motorista', 'DriverController@index')->name('motorista.index');
+    Route::post('motorista/cadastrar', 'DriverController@store')->name('motorista.store');
 
     
 });

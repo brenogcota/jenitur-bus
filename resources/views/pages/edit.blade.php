@@ -15,6 +15,9 @@
                 $id = $arr[3];
 
                 $tripData = App\Utils::returnTripData($id);
+
+                $drivers = App\Utils::returnDrivers();
+                $bus = App\Utils::returnBus();
             @endphp
 
 <!-- general form elements -->
@@ -67,16 +70,26 @@
                 <div class="form-group">
     
                     <label>Placa</label>
-                    <input type="text" value="{{ $tripData->PLACAVEICULO }}" class="form-control" name="placa" required>
+                    <select name="placa" class="form-control" id="">
+                      @foreach ($bus as $b)
+                          <option required value="{{ $b->PLACA }}">{{ $b->PLACA }}</option>
+                      @endforeach
+                    </select>
 
                 </div>
 
                 <div class="form-group">
-    
+
                     <label>Motorista</label>
-                    <input type="text" value="{{ $tripData->MOTORISTA }}" class="form-control" name="motorista" required>
+                    <select name="motorista" class="form-control" id="">
+                      @foreach ($drivers as $driver)
+                          <option required value="{{ $driver->NOME }}">{{ $driver->NOME }}</option>
+                      @endforeach
+                    </select>
+
 
                 </div>
+
 
                 <div class="form-group">
     

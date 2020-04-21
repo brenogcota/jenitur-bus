@@ -67,7 +67,7 @@
 					@if ( $t->STATUS == 'Aberto')
 						<td><span class="label label-success">{{ $t->STATUS }}</span></td>
 					@else
-						<td><span class="label label-warning">{{ $t->STATUS }}</span></td>
+						<td><span class="label label-danger">{{ $t->STATUS }}</span></td>
 					@endif
 					<td>
 						<a href="{{ route('viagem.delete', [$t->id]) }}"><i class="fas fa-trash"></i></a>

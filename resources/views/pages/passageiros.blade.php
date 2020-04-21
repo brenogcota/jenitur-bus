@@ -11,7 +11,6 @@
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
 	width: 100%;
-	overflow: scroll;
 	}
 
 	#example1 td, #example1 th {
