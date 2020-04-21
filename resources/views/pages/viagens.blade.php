@@ -30,13 +30,14 @@
 	background-color: #fff;
 	color: #666;
 	}
+
 </style>
 
 @section('content')
 
 	
 			
-			<div class="box-body">
+			<div class="box-body" style="overflow: auto;">
               <table id="example1" class="table table-bordered">
                 <tr>
 				  <th>#</th>
@@ -45,6 +46,7 @@
 				  <th>Data</th>
 				  <th>Placa</th>
 				  <th>Horario</th>
+				  <th>Motorista</th>
 				  <th>Status</th>
 				  <th>Ação</th>
                 </tr>
@@ -60,7 +62,13 @@
 					<td>{{ $t->DATA }}</td>
 					<td>{{ $t->PLACAVEICULO }}</td>
 					<td>{{ $t->HORARIO }} </td>
-					<td><span class="label label-success">{{ $t->STATUS }}</span></td>
+					<td>{{ $t->MOTORISTA }}</td>
+					
+					@if ( $t->STATUS == 'Aberto')
+						<td><span class="label label-success">{{ $t->STATUS }}</span></td>
+					@else
+						<td><span class="label label-warning">{{ $t->STATUS }}</span></td>
+					@endif
 					<td>
 						<a href="{{ route('viagem.delete', [$t->id]) }}"><i class="fas fa-trash"></i></a>
 						<a href="{{ route('viagem.edit', [$t->id]) }}"><i class="fas fa-edit"></i></a>

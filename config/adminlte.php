@@ -149,6 +149,18 @@ return [
         ],
 
         [
+            'text'        => 'Motorista',
+            'url'         => 'motorista',
+            'icon'        => 'fas fa-user',
+        ],
+
+        [
+            'text'        => 'Onibus',
+            'url'         => 'onibus',
+            'icon'        => 'fas fa-bus',
+        ],
+
+        [
             'text'        => 'Relatório',
             'url'         => 'relatorio',
             'icon'        => 'fas fa-archive',

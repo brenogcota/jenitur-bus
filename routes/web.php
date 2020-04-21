@@ -21,7 +21,11 @@ Route::group(['middleware' => ['auth']], function () {
     
     Route::get('relatorio', 'RecordController@index')->name('relatorio.index');
     Route::get('relatorio-viagem/pdf', 'RecordController@generatePDF')->name('relatorio-viagem.pdf');
-    Route::get('relatorio-passageiro/pdf', 'RecordController@generatePassengersPDF')->name('relatorio-passageiros.pdf');
+    Route::get('relatorio-passageiro/pdf/{id}', 'RecordController@generatePassengersPDF')->name('relatorio-passageiros.pdf');
+
+    Route::get('onibus', 'BusController@index')->name('onibus.index');
+
+    Route::get('motorista', 'DriverController@index')->name('motorista.index');
 
     
 });

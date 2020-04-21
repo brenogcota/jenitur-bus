@@ -11,6 +11,7 @@
 	font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
 	border-collapse: collapse;
 	width: 100%;
+	overflow: scroll;
 	}
 
 	#example1 td, #example1 th {
@@ -40,8 +41,8 @@
                 $di = $arr[2];
                 
             @endphp
-				<a href="{{ route('relatorio-passageiros.pdf') }}">Gerar Relatorio</i></a>
-                <div class="box-body">
+				<a href="{{ route('relatorio-passageiros.pdf', [$di]) }}">Gerar Relatorio</i></a>
+                <div class="box-body" style="overflow: auto;">
                 <table id="example1" class="table table-bordered">
                     <tr>
                     <th>Nome</th>

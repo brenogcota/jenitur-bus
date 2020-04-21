@@ -96,14 +96,14 @@
                 <div class="form-group">
                   
                         <label>CPF</label>
-						<input class="form-control" name="cpf" required>
+						            <input class="form-control" placeholder="13628207681" name="cpf" required>
 
                 </div>
 
                 <div class="form-group">
     
                          <label>RG</label>
-						<input type="text" class="form-control" name="rg" required>
+						             <input type="text" class="form-control" name="rg" required>
 
                 </div>
 

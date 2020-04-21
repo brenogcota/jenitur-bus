@@ -9,6 +9,10 @@
 
 @section('content')
 
+    @php
+      $drivers = App\Utils::returnDrivers();
+      $bus = App\Utils::returnBus();
+    @endphp
     
     <!-- general form elements -->
     <div class="row">
@@ -26,21 +30,22 @@
                 <div class="form-group">
                   
                     <label>Origem</label>
-                    <input type="text" class="form-control" name="origem" required>
+                    <input type="text" placeholder="ex: Berilo, MG" class="form-control" name="origem" required>
 
                 </div>
 
                 <div class="form-group">
                   
                         <label>Destino</label>
-						<input class="form-control" name="destino" required>
+					            	<input class="form-control" name="destino" required>
 
                 </div>
+
 
                 <div class="form-group">
     
                          <label>Horário</label>
-						<input type="text" class="form-control" name="horario" required>
+						            <input type="text" class="form-control" placeholder="06:00" name="horario" required>
 
                 </div>
 
@@ -60,11 +65,33 @@
                 <div class="form-group">
     
                     <label>Placa</label>
-                <input type="text" class="form-control" name="placa" required>
+                    <select name="placa" class="form-control" id="">
+                      @foreach ($bus as $b)
+                          <option required value="{{ $b->PLACA }}">{{ $b->PLACA }}</option>
+                      @endforeach
+                    </select>
+
+                </div>
+
+                <div class="form-group">
+    
+                    <label>Motorista</label>
+                    <select name="motorista" class="form-control" id="">
+                      @foreach ($drivers as $driver)
+                          <option required value="{{ $driver->NOME }}">{{ $driver->NOME }}</option>
+                      @endforeach
+                    </select>
+
 
                 </div>
 
 
+
+                <div class="form-group">
+    
+                    <label>Observação</label>
+                    <input type="full-text" name="observacao" class="form-control">
+                </div>
                
                 
                 

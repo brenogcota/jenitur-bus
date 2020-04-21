@@ -43,6 +43,7 @@
 				  <th>Data</th>
 				  <th>Placa</th>
 				  <th>Horario</th>
+				  <th>Motorista</th>
                 </tr>
 
 		@foreach($trip as $t)
@@ -55,6 +56,7 @@
 					<td>{{ $t->DATA }}</td>
 					<td>{{ $t->PLACAVEICULO }}</td>
 					<td>{{ $t->HORARIO }} </td>
+					<td>{{ $t->MOTORISTA }}</td>
 					</tr>
 					
 		@endforeach

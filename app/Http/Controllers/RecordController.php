@@ -44,16 +44,16 @@ class RecordController extends Controller
 
     public function generatePDF()
     {
-        $trip = $this->tripModel->all();
+        $trip = $this->tripModel->orderBy('DATA', 'DESC')->limit(10)->get();
     
         return \PDF::loadView('relatorio-pdf', compact('trip'))
                     ->setPaper('a4', 'landscape')
                     ->stream('relatorio-de-viagens.pdf');
     }
 
-    public function generatePassengersPDF()
+    public function generatePassengersPDF($id)
     {
-        $passenger = $this->passengerModel->all();
+        $passenger = $this->passengerModel->orderBy('NOME', 'ASC')->where('CODVIAGEM', $id)->limit(10)->get();
     
         return \PDF::loadView('relatorio-passageiros-pdf', compact('passenger'))
                     ->setPaper('a4', 'landscape')

@@ -9,7 +9,6 @@
 <style>
   .input-radio {
     opacity: 0;
-    display: none;
   }
 
   .board {
@@ -74,6 +73,8 @@
 
                 $boards = App\Utils::returnBoards($id);
                 $locate = App\Utils::returnVacancies($di);
+
+                $passengerData = App\Utils::returnPassengerData($di);                
                 
             @endphp
                 
@@ -95,21 +96,21 @@
                 <div class="form-group">
                   
                     <label>Nome Completo</label>
-                    <input type="text" class="form-control" name="nome" required>
+                    <input type="text" value="{{ $passengerData->NOME }}" class="form-control" name="nome" required>
 
                 </div>
 
                 <div class="form-group">
                   
                         <label>CPF</label>
-						<input class="form-control" name="cpf" required>
+						            <input class="form-control" value="{{ $passengerData->CPF }}" name="cpf" required>
 
                 </div>
 
                 <div class="form-group">
     
                          <label>RG</label>
-						<input type="text" class="form-control" name="rg" required>
+						             <input type="text" value="{{ $passengerData->RG }}" class="form-control" name="rg" required>
 
                 </div>
 
@@ -121,7 +122,7 @@
                     <i class="fa fa-calendar"></i>
                   </div>
                   
-                  <input type="date" class="form-control pull-right" id="datepicker" name="datanasc" required>
+                  <input type="date" value="{{ $passengerData->DATANASC }}" class="form-control pull-right" id="datepicker" name="datanasc" required>
                 </div>
                 
                 </div>
@@ -133,7 +134,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-phone"></i>
                     </div>
-                        <input type="text" class="form-control"  name="telefone1" required>
+                        <input type="text" value="{{ $passengerData->TELEFONE1 }}" class="form-control"  name="telefone1" required>
                     </div>
                 </div>
 
@@ -143,41 +144,41 @@
                     <div class="input-group-addon">
                         <i class="fa fa-phone"></i>
                     </div>
-                        <input type="text" class="form-control"  name="telefone2" value="" required>
+                        <input type="text" value="{{ $passengerData->TELEFONE2 }}" class="form-control"  name="telefone2" value="" required>
                     </div>
                 </div>
  
 
                 <div class="form-group">
                     <label class="container-check">Possui criança de colo?
-                      <input id="roundtrip" name="roundtrip" type="checkbox" onclick="bloqueio()">
-                      <span class="checkmark"></span>
+                        <input id="roundtrip" name="roundtrip" type="checkbox" onclick="bloqueio()">
+                        <span class="checkmark"></span>
                     </label> 
                 </div>
 
-				<div id="destinyDateHour" style="display: none">
-					<label class="destiny">Informe os dados da criança</label>
-					<div class="form-group">
+                <div id="destinyDateHour" style="display: none">
+                  <label class="destiny">Informe os dados da criança</label>
+                  <div class="form-group">
+                          
+                      <label>Nome Completo</label>
+                      <input type="text" value="{{ $passengerData->NOMECRIANCA }}" class="form-control" name="nome_crianca">
+
+                  </div>
+
+                  <div class="form-group">
                   
-							<label>Nome Completo</label>
-							<input type="text" class="form-control" name="nome_crianca">
+                      <label>Documento</label>
+                      <input type="text" value="{{ $passengerData->DOCCRIANCA }}" class="form-control" name="documento_crianca">
 
-					</div>
-
-					<div class="form-group">
-					
-							<label>Documento</label>
-							<input type="text" class="form-control" name="documento_crianca">
-
-					</div>
-					
-					
-				</div>
+                  </div>
+                  
+                  
+                </div>
 
 				
                 <div class="form-group">
                 <label id="poltrona">Poltrona atual: {{ $locate }}</label> 
-                  <center>
+                <center>
                   <div class="draw-bus">
                     <span class="vol"></span>
                   </div>
@@ -192,6 +193,7 @@
                                   <input onclick="getBoard({{ $i }})" disabled name="poltrona" id="{{ $i }}" class="input-radio" type="radio" value="{{ $i }}"></input>
                                 @endif
                         @endfor
+                    
                   </div>
                   </center>
                 </div>

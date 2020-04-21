@@ -54,18 +54,13 @@ class TripController extends Controller
        $trip->DESTINO = $request->destino;
        $trip->DATA = $request->data;
        $trip->HORARIO = $request->horario.':00';
+       $trip->PLACAVEICULO = $request->placa;
+       $trip->MOTORISTA = $request->motorista;
 
-       $valBoard = $this->validate->validateBoard($request->placa);
-
-
-       if ($valBoard == 'ok')
-       {
-            $trip->PLACAVEICULO = $request->placa;
+       if($request->observacao){
+           $trip->OBSERVACAO = $request->observacao;
        }
-       else {
-            echo '<script> alert("Placa inválida!") </script>';
-            return $this->create();
-       }
+    
        
       $trip->save();
       return $this->index();
@@ -105,7 +100,8 @@ class TripController extends Controller
                 'DESTINO' => $request->destino,
                 'DATA' => $request->data,
                 'HORARIO' => $request->horario,
-                'STATUS' => $request->status
+                'STATUS' => $request->status,
+                'MOTORISTA' => $request->motorista
             ]);
            
             echo '<script> alert("Viagem atualizada!") </script>';

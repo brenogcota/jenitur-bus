@@ -2,6 +2,8 @@
 Namespace App;
 use App\Models\Passenger;
 use App\Models\Trip;
+use App\Models\Driver;
+use App\Models\Bus;
 use DB;
 
 class Utils {
@@ -67,6 +69,32 @@ class Utils {
         return $result;
 
         
+    }
+
+    static function returnDrivers() {
+        $drivers = new Driver();
+
+        return $drivers::all();
+
+    }
+
+    static function returnBus() {
+        $bus = new Bus();
+
+        return  $bus::all();
+
+    }
+
+    static function returnTripData($id) {
+        $tripData = new Trip();
+
+        return $tripData->find($id);
+    }
+
+    static function returnPassengerData($id) {
+        $passengerData = new Passenger();
+
+        return $passengerData->find($id);
     }
 
     

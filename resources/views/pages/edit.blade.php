@@ -9,11 +9,13 @@
 
 @section('content')
 
-            <?php
+            @php
                 $url = $_SERVER["REQUEST_URI"];
                 $arr = explode("/", $url);
                 $id = $arr[3];
-            ?>
+
+                $tripData = App\Utils::returnTripData($id);
+            @endphp
 
 <!-- general form elements -->
     <div class="row">
@@ -31,21 +33,21 @@
                 <div class="form-group">
                   
                     <label>Origem</label>
-                    <input type="text" class="form-control" name="origem" required>
+                    <input type="text" value="{{ $tripData->ORIGEM }}" class="form-control" name="origem" required>
 
                 </div>
 
                 <div class="form-group">
                   
                         <label>Destino</label>
-						<input class="form-control" name="destino" required>
+						            <input class="form-control" value="{{ $tripData->DESTINO }}" name="destino" required>
 
                 </div>
 
                 <div class="form-group">
     
                          <label>Horário</label>
-						<input type="text" class="form-control" name="horario" required>
+						             <input type="text" class="form-control" value="{{ $tripData->HORARIO }}" name="horario" required>
 
                 </div>
 
@@ -57,7 +59,7 @@
                     <i class="fa fa-calendar"></i>
                   </div>
                   
-                  <input type="date" class="form-control pull-right" id="datepicker" name="data" required>
+                  <input type="date" value="{{ $tripData->DATA }}" class="form-control pull-right" id="datepicker" name="data" required>
                 </div>
                 
                 </div>
@@ -65,14 +67,21 @@
                 <div class="form-group">
     
                     <label>Placa</label>
-                    <input type="text" class="form-control" name="placa" required>
+                    <input type="text" value="{{ $tripData->PLACAVEICULO }}" class="form-control" name="placa" required>
+
+                </div>
+
+                <div class="form-group">
+    
+                    <label>Motorista</label>
+                    <input type="text" value="{{ $tripData->MOTORISTA }}" class="form-control" name="motorista" required>
 
                 </div>
 
                 <div class="form-group">
     
                     <label>Status</label>
-                    <input type="text" class="form-control" name="status" required>
+                    <input type="text" value="{{ $tripData->STATUS }}" class="form-control" name="status" required>
 
                 </div>
         

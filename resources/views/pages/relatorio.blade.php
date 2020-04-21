@@ -36,7 +36,7 @@
 
 	
 			<a href="{{ route('relatorio-viagem.pdf') }}">Gerar Relatorio</i></a>
-			<div class="box-body">
+			<div class="box-body" style="overflow: auto;">
               <table id="example1" class="table table-bordered">
                 <tr>
 				  <th>#</th>
@@ -45,6 +45,7 @@
 				  <th>Data</th>
 				  <th>Placa</th>
 				  <th>Horario</th>
+				  <th>Motorista</th>
 				  <th>Status</th>
                 </tr>
 
@@ -59,7 +60,12 @@
 					<td>{{ $t->DATA }}</td>
 					<td>{{ $t->PLACAVEICULO }}</td>
 					<td>{{ $t->HORARIO }} </td>
-					<td><span class="label label-success">{{ $t->STATUS }}</span></td>
+					<td>{{ $t->MOTORISTA }}</td>
+					@if ( $t->STATUS == 'Aberto')
+						<td><span class="label label-success">{{ $t->STATUS }}</span></td>
+					@else
+						<td><span class="label label-warning">{{ $t->STATUS }}</span></td>
+					@endif
 					</tr>
 					
 		@endforeach
