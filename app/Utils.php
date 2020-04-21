@@ -97,6 +97,11 @@ class Utils {
         return $passengerData->find($id);
     }
 
+    static function returnDriverData($id) {
+        $drivers = new Driver();
+
+        return $drivers->find($id);
+    }
     
 }
 

@@ -28,7 +28,9 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('motorista', 'DriverController@index')->name('motorista.index');
     Route::post('motorista/cadastrar', 'DriverController@store')->name('motorista.store');
-
+    Route::get('motorista/deletar/{id}', 'DriverController@destroy')->name('motorista.delete');
+    Route::get('motorista/editar/{id}', 'DriverController@edit')->name('motorista.edit');
+    Route::post('motorista/editar/{id}', 'DriverController@update')->name('motorista.update');
     
 });
 

@@ -57,6 +57,11 @@ class TripController extends Controller
        $trip->PLACAVEICULO = $request->placa;
        $trip->MOTORISTA = $request->motorista;
 
+       if($request->motorista2)
+       {
+           $trip->MOTORISTA2 = $request->motorista2;
+       }
+
        if($request->observacao){
            $trip->OBSERVACAO = $request->observacao;
        }
@@ -101,7 +106,8 @@ class TripController extends Controller
                 'DATA' => $request->data,
                 'HORARIO' => $request->horario,
                 'STATUS' => $request->status,
-                'MOTORISTA' => $request->motorista
+                'MOTORISTA' => $request->motorista,
+                'MOTORISTA2' => $request->motorista2,
             ]);
            
             echo '<script> alert("Viagem atualizada!") </script>';

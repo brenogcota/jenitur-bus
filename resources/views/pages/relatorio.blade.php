@@ -46,6 +46,7 @@
 				  <th>Placa</th>
 				  <th>Horario</th>
 				  <th>Motorista</th>
+				  <th>2° Motorista</th>
 				  <th>Status</th>
                 </tr>
 
@@ -61,6 +62,7 @@
 					<td>{{ $t->PLACAVEICULO }}</td>
 					<td>{{ $t->HORARIO }} </td>
 					<td>{{ $t->MOTORISTA }}</td>
+					<td>{{ $t->MOTORISTA2 }}</td>
 					@if ( $t->STATUS == 'Aberto')
 						<td><span class="label label-success">{{ $t->STATUS }}</span></td>
 					@else

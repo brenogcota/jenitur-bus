@@ -85,6 +85,18 @@
 
                 </div>
 
+                <div class="form-group">
+                    
+                    <label>2° Motorista</label>
+                    <select name="motorista2" class="form-control" id="">
+                      @foreach ($drivers as $driver)
+                          <option required value="{{ $driver->NOME }}">{{ $driver->NOME }}</option>
+                      @endforeach
+                    </select>
+
+
+                </div>
+
 
 
                 <div class="form-group">

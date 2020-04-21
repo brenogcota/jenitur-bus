@@ -91,6 +91,8 @@
 			</div>
 
 
+
+
 			<div class="box-body" style="overflow: auto;">
               <table id="example1" class="table table-bordered">
                 <tr>
@@ -109,8 +111,8 @@
 					<td>{{ $d->TELEFONE }}</td>
 					<td><a href="https://web.whatsapp.com/send?phone=55{{ $d->WHATSAPP }}&text=Oi" target="_blank">{{ $d->WHATSAPP }}</a></td>
 					<td>
-						<a href=""><i class="fas fa-trash"></i></a>
-						<a href=""><i class="fas fa-edit"></i></a>
+						<a href="{{ route('motorista.delete', [$d->id])}}"><i class="fas fa-trash"></i></a>
+						<a href="{{ route('motorista.edit', [$d->id])}}"><i class="fas fa-edit"></i></a>
 					</td>
 					
 					</tr>

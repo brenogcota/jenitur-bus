@@ -61,7 +61,7 @@ class DriverController extends Controller
 
     public function edit($id)
     {
-        return view('')->with(compact('id'));
+        return view('pages.edit-motorista')->with(compact('id'));
     }
 
     
@@ -74,17 +74,17 @@ class DriverController extends Controller
         {
             $update = $driver->update([
                 'NOME' => $request->nome,
-                'TELEFONE' => $request->modelo,
+                'TELEFONE' => $request->telefone,
                 'WHATSAPP' => $request->whatsapp,
                 
             ]);
            
             echo '<script> alert("Dados atualizados!") </script>';
-            
+            return $this->index();
           }
           else {
               echo '<script> alert("Tente novamente mais tarde!") </script>';
-             
+              return $this->index();
           }
       }
 
@@ -97,7 +97,7 @@ class DriverController extends Controller
         if($driver)
         {
           $delete = $driver->delete();
-        
+          return $this->index();
         }
         else {
             echo '<script> alert("Tente novamente mais tarde!") </script>';
