@@ -4,14 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Driver;
+use App\Validate;
 
 class DriverController extends Controller
 {
     //
 
     private $driverModel;
+    private $validate;
 
-    public function __construct(Driver $driver)
+    public function __construct(Driver $driver, Validate $validate)
     {
         
         $this->driverModel = $driver;
@@ -41,6 +43,14 @@ class DriverController extends Controller
        $driver->NOME = $request->nome;
        $driver->TELEFONE = $request->telefone;
        $driver->WHATSAPP = $request->whatsapp;
+       $driver->RG = $request->rg;
+
+       $valCPF =  $this->validate;
+       $valCPF->validateCPF($request->cpf);
+       if($valCPF == true)
+            $driver->CPF = $request->cpf;
+       else
+           return '<script> alert("CPF Inválido!") </script>';
 
        
       $driver->save();
@@ -76,7 +86,8 @@ class DriverController extends Controller
                 'NOME' => $request->nome,
                 'TELEFONE' => $request->telefone,
                 'WHATSAPP' => $request->whatsapp,
-                
+                'CPF' => $request->cpf,
+                'RG' => $request->rg
             ]);
            
             echo '<script> alert("Dados atualizados!") </script>';

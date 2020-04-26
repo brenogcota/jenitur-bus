@@ -40,7 +40,7 @@
                 $di = $arr[2];
                 
             @endphp
-				<a href="{{ route('relatorio-passageiros.pdf', [$di]) }}">Gerar Relatorio</i></a>
+				<a href="{{ route('relatorio-passageiros.pdf', [$di]) }}" target="_blank">Gerar Relatorio</i></a>
                 <div class="box-body" style="overflow: auto;">
                 <table id="example1" class="table table-bordered">
                     <tr>

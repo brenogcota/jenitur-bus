@@ -58,6 +58,9 @@
     background: #ff5b5b !important;
     cursor: not-allowed;
   }
+
+  
+ 
 </style>
 
 
@@ -72,6 +75,7 @@
             @endphp
                 
     <!-- general form elements -->
+    
     <div class="row">
         <!-- left column -->
         <div class="col-md-6">
@@ -137,7 +141,7 @@
                     <div class="input-group-addon">
                         <i class="fa fa-phone"></i>
                     </div>
-                        <input type="text" class="form-control"  name="telefone2" required>
+                        <input type="text" class="form-control"  name="telefone2" placeholder="Opcional">
                     </div>
                 </div>
  
@@ -172,7 +176,7 @@
                 
                 <div class="form-group">
                 <label id="poltrona">Poltrona</label> 
-                  <center>
+                <center>
                   <div class="draw-bus">
                     <span class="vol"></span>
                   </div>
@@ -180,7 +184,7 @@
                         @for($i = 1; $i <= 46; $i++)
                                 @if (in_array($i, $boards))
                                   <label class="board" for="{{ $i }}">{{ $i }}</label>
-                                  <input onclick="getBoard({{ $i }})" name="poltrona" id="{{ $i}}" class="input-radio" type="radio" value="{{ $i }}"></input>
+                                  <input onclick="getBoard({{ $i }})" name="poltrona" id="{{ $i}}" class="input-radio" type="radio" value="{{ $i }}" required></input>
                           
                                 @else 
                                   <label class="board red" disabled for="{{ $i }}">{{ $i }}</label>
@@ -189,7 +193,7 @@
                         @endfor
                     
                   </div>
-                  </center>
+                </center>
                 </div>
                 
                 
@@ -201,6 +205,8 @@
               </div>
             </form>
           </div>
+
+
           
           <!-- /.box -->
 @stop

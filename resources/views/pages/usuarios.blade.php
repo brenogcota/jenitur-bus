@@ -3,7 +3,7 @@
 @section('title', 'Jenitur')
 
 @section('content_header')
-    <h1>Motoristas</h1>
+    <h1>Usuários</h1>
 @stop
 
 <style>
@@ -35,9 +35,9 @@
 @section('content')
 
 	
-			<!-- Button to Open the Modal -->
+            <!-- Button to Open the Modal -->
 			<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">
-				Adicionar motorista
+				Adicionar Usuario
 			</button>
 
 
@@ -48,49 +48,47 @@
 
 				<!-- Modal Header -->
 				<div class="modal-header">
-					<h4 class="modal-title">Adicionar Motorista</h4>
+					<h4 class="modal-title">Adicionar Usuário</h4>
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 
 				<!-- Modal body -->
-				<form action="{{ route('motorista.store')}}" method="post">
+				<form action="{{ route('usuario.store')}}" method="post">
 					@csrf
 					<div class="modal-body">
 							<div class="box-body">
 								<div class="form-group">
 								
 									<label>Nome Completo</label>
-									<input type="text" class="form-control" name="nome" required>
+									<input type="text" class="form-control" name="name" required>
 
 								</div>
 
 								<div class="form-group">
 								
-									<label>Telefone</label>
-									<input type="text" class="form-control" name="telefone" required>
+									<label>Email</label>
+									<input type="email" class="form-control" name="email" required>
 
 								</div>
 
 								<div class="form-group">
 								
-									<label>Whatsapp</label>
-									<input type="text" class="form-control" name="whatsapp" placeholder="Opcional">
+									<label>Permissão</label>
+                                    <select name="permission" class="form-control">
+                                        <option value="ADM">Administrador</option>
+                                        <option value="MOD">Moderador</option>
+                                    </select>
 
 								</div>
 
 								<div class="form-group">
 								
-									<label>CPF</label>
-									<input type="text" class="form-control" name="cpf" required>
+									<label>Senha</label>
+									<input type="password" class="form-control" name="password" required>
 
 								</div>
 
-								<div class="form-group">
 								
-									<label>RG</label>
-									<input type="text" class="form-control" name="rg" required>
-
-								</div>
 							</div>
 					</div>
 
@@ -104,36 +102,27 @@
 			</div>
 			</div>
 
-
-
-
 			<div class="box-body" style="overflow: auto;">
               <table id="example1" class="table table-bordered">
                 <tr>
+				  
                   <th>Nome</th>
-				  <th>CPF</th>
-				  <th>RG</th>
-                  <th>Telefone</th>
-				  <th>Whatsapp</th>
-                  <th>Ação</th>
+                  <th>Email</th>
+				  <th>Permissão</th>
+				  <th>Ação</th>
                 </tr>
 
-		@foreach($driver as $d)
+		@foreach($users as $user)
 
-		
-			
 					<tr>
-					<td>{{ $d->NOME }}</td>
-					<td>{{ $d->CPF }}</td>
-					<td>{{ $d->RG }}</td>
-					<td>{{ $d->TELEFONE }}</td>
-					<td><a href="https://web.whatsapp.com/send?phone=55{{ $d->WHATSAPP }}&text=Oi" target="_blank">{{ $d->WHATSAPP }}</a></td>
+					<td>{{ $user->name }}</td>
+					<td>{{ $user->email }}</td>
+					<td>{{ $user->permission }}</td>
 					<td>
-						<a href="{{ route('motorista.delete', [$d->id])}}"><i class="fas fa-trash"></i></a>
-						<a href="{{ route('motorista.edit', [$d->id])}}"><i class="fas fa-edit"></i></a>
+						<a href="{{ route('usuario.delete', [$user->id])}}"><i class="fas fa-trash"></i></a>
+						<a href="{{ route('usuario.edit', [$user->id])}}"><i class="fas fa-edit"></i></a>
 					</td>
 					
-					</tr>
 					
 		@endforeach
 

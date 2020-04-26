@@ -35,7 +35,7 @@
 @section('content')
 
 	
-			<a href="{{ route('relatorio-viagem.pdf') }}">Gerar Relatorio</i></a>
+			<a href="{{ route('relatorio-viagem.pdf') }}" target="_blank">Gerar Relatorio</i></a>
 			<div class="box-body" style="overflow: auto;">
               <table id="example1" class="table table-bordered">
                 <tr>

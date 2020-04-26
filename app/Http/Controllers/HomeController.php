@@ -50,6 +50,7 @@ class HomeController extends Controller
         return view('vendor.adminlte.register');
     }
 
+
     static public function countTrip() {
 
         $trip = new Trip();

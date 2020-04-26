@@ -53,7 +53,7 @@ class RecordController extends Controller
 
     public function generatePassengersPDF($id)
     {
-        $passenger = $this->passengerModel->orderBy('NOME', 'ASC')->where('CODVIAGEM', $id)->limit(10)->get();
+        $passenger = $this->passengerModel->orderBy('NOME', 'ASC')->where('CODVIAGEM', $id)->get();
     
         return \PDF::loadView('relatorio-passageiros-pdf', compact('passenger'))
                     ->setPaper('a4', 'landscape')

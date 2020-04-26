@@ -31,10 +31,30 @@
     </style>
     </head>
     <body>
+
+	@php        
+		$dia = date("d")-1;
+		$mes = date("m");
+		$data = $dia . '/' . $mes;
+
+		$url = $_SERVER["REQUEST_URI"];
+		$arr = explode("/", $url);
+		$id = $arr[3];
+
+		$tripData = App\Utils::returnTripData($id);     
+	@endphp
+
+
     
 	<center>
 		<h2>Relatório de passageiros</h2>
 	</center>
+	<h3>Jenitur Turismo</h3>
+	<strong>Data: </strong>{{ $data }}<br>
+	<strong>n° viagem:</strong> {{ $tripData->id }}<br>
+	<strong>Origem:</strong> {{ $tripData->ORIGEM }}<br>
+	<strong>Destino:</strong> {{ $tripData->DESTINO }}
+	<br> <br> <br>
     
 	<div class="box-body">
                 <table id="example1" class="table table-bordered">
@@ -43,8 +63,8 @@
                     <th>CPF</th>
                     <th>RG</th>
                     <th>Poltrona</th>
-                    <th>Telefone 1</th>
-                    <th>Telefone 2</th>
+                    <th>Telefone</th>
+                    <th>2° Telefone</th>
 					<th>Pos. criança</th>
                     <th>Nome Criança</th>
                     <th>Doc. Criança</th>

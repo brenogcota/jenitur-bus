@@ -131,7 +131,7 @@ class PassengerController extends Controller
             $passenger->POLTRONA = $request->poltrona;
         }
 
-        if($request->documento_crianca) {
+        if($request->documento_crianca != '-') {
             $update = $passenger->update([
                 'POSSCRIANCA' => 'SIM',
                 'NOMECRIANCA'  => $request->nome_crianca, 
@@ -173,15 +173,17 @@ class PassengerController extends Controller
         $id_viagem = $passenger->CODVIAGEM;
         $util = $this->Utils;
 
-        $util->removeVacancie($id_viagem);
+        
 
         if($passenger){
             $delete = $passenger->delete();
-            return $this->index();
+            $util->removeVacancie($id_viagem);
+            echo '<script> alert("Passageiro deletado!") </script>';
+            return view('home');
         }
         else{
-            echo '<script> alert("Erro ao excluir!") </script>';
-            return $this->index();
+            echo '<script> alert("Erro ao deletar!") </script>';
+            return view('home');
         }
     }
 

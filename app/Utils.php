@@ -4,6 +4,7 @@ use App\Models\Passenger;
 use App\Models\Trip;
 use App\Models\Driver;
 use App\Models\Bus;
+use App\User;
 use DB;
 
 class Utils {
@@ -101,6 +102,12 @@ class Utils {
         $drivers = new Driver();
 
         return $drivers->find($id);
+    }
+
+    static function returnUserData($id) {
+        $user = new User();
+
+        return $user;
     }
     
 }

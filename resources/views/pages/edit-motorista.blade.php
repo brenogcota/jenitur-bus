@@ -97,18 +97,30 @@
                 <div class="form-group">
                   
                         <label>Telefone</label>
-						<input class="form-control" value="{{ $driverData->TELEFONE }}" name="telefone" required>
+						            <input class="form-control" value="{{ $driverData->TELEFONE }}" name="telefone" required>
+
+                </div>
+
+                <div class="form-group">
+    
+                         <label>Whatsapp</label>
+						             <input type="text" value="{{ $driverData->WHATSAPP }}" class="form-control" name="whatsapp" required>
 
                 </div>
 
                 <div class="form-group">
     
                          <label>RG</label>
-						 <input type="text" value="{{ $driverData->WHATSAPP }}" class="form-control" name="whatsapp" required>
+						             <input type="text" value="{{ $driverData->RG }}" class="form-control" name="rg" required>
 
                 </div>
 
-                
+                <div class="form-group">
+    
+                         <label>CPF</label>
+						             <input type="text" value="{{ $driverData->CPF }}" class="form-control" name="cpf" required>
+
+                </div>
                 
               </div>
               <!-- /.box-body -->

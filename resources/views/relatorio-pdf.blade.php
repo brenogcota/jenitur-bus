@@ -32,9 +32,19 @@
     </head>
     <body>
     
+	@php        
+		$dia = date("d")-1;
+		$mes = date("m");
+		$data = $dia . '/' . $mes;
+	@endphp
+
 	<center>
-		<h2>Relatório de viagens</h2>
+		<h2>Relatório</h2>
+		
 	</center>
+	<h3>Jenitur Turismo</h3>
+	<strong>Data: </strong><span>{{ $data }}</span><br><br><br>
+
     <div class="box-body">
               <table id="example1" class="table table-bordered">
                 <tr>
@@ -42,8 +52,10 @@
                   <th>Destino</th>
 				  <th>Data</th>
 				  <th>Placa</th>
-				  <th>Horario</th>
+				  <th>Horário</th>
 				  <th>Motorista</th>
+				  <th>2° Motorista</th>
+				  <th>Ocupação</th>
                 </tr>
 
 		@foreach($trip as $t)
@@ -57,6 +69,8 @@
 					<td>{{ $t->PLACAVEICULO }}</td>
 					<td>{{ $t->HORARIO }} </td>
 					<td>{{ $t->MOTORISTA }}</td>
+					<td>{{ $t->MOTORISTA2 }}</td>
+					<td>{{ 46 - $t->VAGAS }}</td>
 					</tr>
 					
 		@endforeach

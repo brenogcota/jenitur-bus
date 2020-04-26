@@ -167,8 +167,8 @@ return [
         ],
 
         [
-            'text'        => 'Cadastrar novo usuario',
-            'url'         => 'register',
+            'text'        => 'Usuários',
+            'url'         => 'usuarios',
             'icon'        => 'fas fa-user',
         ],
         
