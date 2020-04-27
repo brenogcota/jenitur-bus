@@ -55,7 +55,7 @@
 				  <th>Horário</th>
 				  <th>Motorista</th>
 				  <th>2° Motorista</th>
-				  <th>Ocupação</th>
+				  <th>Qnt. Passageiros</th>
                 </tr>
 
 		@foreach($trip as $t)

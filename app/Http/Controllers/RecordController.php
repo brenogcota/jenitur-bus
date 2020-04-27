@@ -45,6 +45,13 @@ class RecordController extends Controller
     public function generatePDF()
     {
         $trip = $this->tripModel->orderBy('DATA', 'DESC')->limit(10)->get();
+        foreach($trip as $t){
+            $format = $this->format;
+            $date = $format->formatDate($t->DATA);
+            $hour = $format->formatHour($t->HORARIO);
+            $t->DATA = $date;
+            $t->HORARIO = $hour;    
+        }
     
         return \PDF::loadView('relatorio-pdf', compact('trip'))
                     ->setPaper('a4', 'landscape')

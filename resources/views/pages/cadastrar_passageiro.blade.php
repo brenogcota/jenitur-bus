@@ -59,7 +59,9 @@
     cursor: not-allowed;
   }
 
-  
+  .form-group p {
+    color: #999;
+  }
  
 </style>
 
@@ -147,30 +149,39 @@
  
 
                 <div class="form-group">
-                    <label class="container-check">Possui criança de colo?
+                    <label class="container-check">Possui criança?
                       <input id="roundtrip" name="roundtrip" type="checkbox" onclick="bloqueio()">
                       <span class="checkmark"></span>
                     </label> 
                 </div>
 
-				<div id="destinyDateHour" style="display: none">
-					<label class="destiny">Informe os dados da criança</label>
-					<div class="form-group">
+                <div id="destinyDateHour" style="display: none">
+                  <label class="destiny">Informe os dados do acompanhante</label>
+                  <div class="form-group">
+                          
+                      <label>Nome Completo</label>
+                      <input type="text" class="form-control" name="nome_crianca">
+
+                  </div>
+
+                  <div class="form-group">
                   
-							<label>Nome Completo</label>
-							<input type="text" class="form-control" name="nome_crianca">
+                      <label>Documento</label>
+                      <input type="text" class="form-control" name="documento_crianca">
 
-					</div>
+                  </div>
 
-					<div class="form-group">
-					
-							<label>Documento</label>
-							<input type="text" class="form-control" name="documento_crianca">
+                  <div class="form-group">
+                    <label class="container-check">Ocupa poltrona?
+                      <input value="sim" name="poltrona_acompanhante" type="checkbox">
+                      <span class="checkmark"></span>
+                      <p>caso ocupe poltrona será colocado na poltrona mais próxima do passageiro.</p>
+                    </label> 
+                </div>
 
-					</div>
-					
-					
-				</div>
+                  
+                  
+                </div>
 
 				
                 

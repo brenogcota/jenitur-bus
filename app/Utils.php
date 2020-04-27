@@ -49,10 +49,51 @@ class Utils {
         $trip->save();
     }
 
+    public function verifyBoard($id, $board){
+
+        $boards = $this->returnBoards($id);
+
+        for($i = $board+1; $i <= $board+6; $i++)
+        {
+            if(in_array($i, $boards) && $i != $board)
+            {
+                return $i;
+            }
+        }
+
+        for($i = $board-1; $i > $board-5; $i++)
+        {
+            if(in_array($i, $boards) && $i != $board)
+            {
+                return $i;
+            }
+        }
+
+        for($i = $board+1; $i <= 46; $i++)
+        {
+            if(in_array($i, $boards) && $i != $board)
+            {
+                return $i;
+            }
+        }
+
+        for($i = 46; $i >= 1; $i++)
+        {
+            if(in_array($i, $boards) && $i != $board)
+            {
+                return $i;
+            }
+        }
+    }
+
+
+
     static function returnBoards($id)
     {
         
         $boards = DB::table('passageiro')->where('CODVIAGEM', $id)->select('POLTRONA')->get();
+        $boardsAC = DB::table('passageiro')->where('CODVIAGEM', $id)->select('POLTRONA_ACOMPANHANTE')->get();
+
         $arrBoard = array();
         $arr = [1, 2, 3 , 4, 5, 6, 7, 8, 9, 10,
                 11, 12, 13 , 14, 15, 16, 17, 18, 19, 20,
@@ -63,6 +104,10 @@ class Utils {
 
         foreach($boards as $board) {
             array_push($arrBoard, $board->POLTRONA);
+        }
+
+        foreach($boardsAC as $boardAC) {
+            array_push($arrBoard, $boardAC->POLTRONA_ACOMPANHANTE);
         }
 
         $result = array_diff($arr, $arrBoard);

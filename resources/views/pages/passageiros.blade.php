@@ -50,10 +50,11 @@
                     <th>Poltrona</th>
                     <th>Telefone</th>
                     <th>Tel. Reserva</th>
-					<th>Pos. criança</th>
-                    <th>Nome Criança</th>
-                    <th>Doc. Criança</th>
-					<th>Usuar. Cad</th>
+					<th>Criança</th>
+                    <th>Nome</th>
+                    <th>Documento</th>
+					<th>Poltrona criança</th>
+					<th>Func. cad</th>
 					<th>Ação</th>
                     </tr>
 
@@ -70,6 +71,7 @@
 					<td>{{ $p->POSSCRIANCA }}</td>
 					<td>{{ $p->NOMECRIANCA }} </td>
                     <td>{{ $p->DOCCRIANCA }} </td>
+					<td>{{ $p->POLTRONA_ACOMPANHANTE }}</td>
 					<td>{{ $p->USUARIO }}</td>
 					<td>
 						<a href="{{ route('passageiro.delete', [$p->id]) }}"><i class="fas fa-trash"></i></a>

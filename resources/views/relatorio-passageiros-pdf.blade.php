@@ -65,10 +65,11 @@
                     <th>Poltrona</th>
                     <th>Telefone</th>
                     <th>2° Telefone</th>
-					<th>Pos. criança</th>
-                    <th>Nome Criança</th>
-                    <th>Doc. Criança</th>
-					<th>Usuar. Cad</th>
+					<th>Criança</th>
+                    <th>Nome</th>
+                    <th>Documento</th>
+					<th>Poltrona criança</th>
+					<th>Funcionário</th>
                     </tr>
 
         @foreach($passenger as $p)
@@ -84,6 +85,7 @@
 					<td>{{ $p->POSSCRIANCA }}</td>
 					<td>{{ $p->NOMECRIANCA }} </td>
                     <td>{{ $p->DOCCRIANCA }} </td>
+					<td>{{ $p->POLTRONA_ACOMPANHANTE }}</td>
 					<td>{{ $p->USUARIO }}</td>
 					</tr>
 					

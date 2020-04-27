@@ -64,6 +64,19 @@ class PassengerController extends Controller
 
             $passenger->POLTRONA = $request->poltrona;
 
+            if($request->poltrona_acompanhante == 'sim') {
+                
+                $poltrona = $this->Utils->verifyBoard($id, $request->poltrona);
+
+                $res = $this->Utils->updateVacancie($id);
+                if($res)
+                {
+                    $passenger->POLTRONA_ACOMPANHANTE = $poltrona;
+                }
+            }
+                
+           
+
             $passenger->CODVIAGEM = $id;
 
             $user = Auth::user()->name;

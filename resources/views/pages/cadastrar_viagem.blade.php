@@ -30,7 +30,7 @@
                 <div class="form-group">
                   
                     <label>Origem</label>
-                    <input type="text" placeholder="ex: Berilo, MG" class="form-control" name="origem" required>
+                    <input type="text" placeholder="ex: Berilo/ MG" class="form-control" name="origem" required>
 
                 </div>
 
@@ -45,7 +45,7 @@
                 <div class="form-group">
     
                          <label>Horário</label>
-						            <input type="text" class="form-control" placeholder="06:00" name="horario" required>
+						            <input type="time" class="form-control" placeholder="06:00" name="horario" required>
 
                 </div>
 
@@ -102,7 +102,7 @@
                 <div class="form-group">
     
                     <label>Observação</label>
-                    <input type="full-text" name="observacao" class="form-control">
+                    <input type="text-area" name="observacao" placeholder="Opcional" class="form-control">
                 </div>
                
                 

@@ -43,8 +43,8 @@
                   <th>Origem</th>
                   <th>Destino</th>
 				  <th>Data</th>
-				  <th>Placa</th>
-				  <th>Horario</th>
+				  <th>Onibus</th>
+				  <th>Horário</th>
 				  <th>Motorista</th>
 				  <th>2° Motorista</th>
 				  <th>Status</th>
